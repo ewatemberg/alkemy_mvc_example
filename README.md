@@ -27,7 +27,7 @@ Design and implement simple school registration system
 
   2) Use the following access:
 
-    jdbc url: jdbc:h2:mem:testdb
+    jdbc url: jdbc:h2:file:/data/demo;DB_CLOSE_ON_EXIT=FALSE
     user: sa
     pass: password
 
