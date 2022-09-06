@@ -1,8 +1,10 @@
 package org.alkemy.app.controller;
 
 import org.alkemy.app.config.ApiVersion;
-import org.alkemy.app.dto.CourseDTO;
-import org.alkemy.app.service.SchoolService;
+import org.alkemy.app.dto.StudentDTO;
+import org.alkemy.app.service.StudentService;
+import org.alkemy.app.service.impl.StudentServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,41 +19,42 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api")
-public class SchoolController {
+public class StudentController {
 
-    Logger logger = Logger.getLogger(SchoolController.class.getName());
+    Logger logger = Logger.getLogger(StudentController.class.getName());
 
-    public static final String PATH = "/courses";
+    public static final String PATH = "/students";
     public static final String PATH_ID = PATH + "/{id}";
 
-    private SchoolService schoolService = new SchoolService();
+    @Autowired //patron creacional (singleton)
+    private StudentService studentService;
 
     /**
-     * Crea un nuevo curso
+     * Crea un nuevo estudiante
      *
-     * @param courseDTO
+     * @param studentDTO
      * @return
      */
     @PostMapping(value = ApiVersion.V1 + PATH)
-    public ResponseEntity<CourseDTO> createCourse(@RequestBody CourseDTO courseDTO) {
-        logger.log(Level.INFO, "REST request to save Course : {}", courseDTO);
+    public ResponseEntity<StudentDTO> create(@RequestBody StudentDTO studentDTO) {
+        logger.log(Level.INFO, "REST request to save Student : {}", studentDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(schoolService.saveCourse(courseDTO));
+                .body(studentService.save(studentDTO));
     }
 
 
     /**
-     * Obtiene la informacion de un curso por id
+     * Obtiene la informacion de un estudiante por id
      *
      * @param id
      * @return
      */
     @GetMapping(ApiVersion.V1 + PATH_ID)
-    public ResponseEntity<CourseDTO> get(@PathVariable Long id) {
-        logger.log(Level.INFO, "REST request to get Course : {}", id);
+    public ResponseEntity<StudentDTO> get(@PathVariable Long id) {
+        logger.log(Level.INFO, "REST request to get Student : {}", id);
         return ResponseEntity
                 .ok()
-                .body(schoolService.findOneCourse(id));
+                .body(studentService.findOne(id));
     }
 
 }
