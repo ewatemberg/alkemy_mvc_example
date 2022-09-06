@@ -31,4 +31,4 @@ Design and implement simple school registration system
     user: sa
     pass: password
 
-![](doc/h2_console.png)
+![](docs/h2_console.png)
