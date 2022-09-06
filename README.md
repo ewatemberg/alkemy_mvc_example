@@ -21,14 +21,13 @@ Design and implement simple school registration system
 
 ## Develop
 
-  1) Run the **Application.java** to access DB H2 Console
+  1) Use the following access into DBeaver o MySQL Workbench:
 
-    http://localhost:8080/h2-console
+    hostname: localhost
+    puerto: 3306
+    user: root
+    pass: root
 
-  2) Use the following access:
+![](doc/mysql_workbench.png)
 
-    jdbc url: jdbc:h2:mem:testdb
-    user: sa
-    pass: password
-
-![](doc/h2_console.png)
+![](doc/dbeaver.png)
